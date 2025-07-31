@@ -1,71 +1,104 @@
-MyFood – Mini Food-Ordering Console App
-A tiny Java console program that lets you sign-up, log-in and order food from a MySQL-backed menu.
-Built with core-JDBC, no external frameworks.
-What it does
-• Greets the user and offers two choices: Sign-Up or Log-In
-• Validates e-mail & password against simple regex rules
-• Persists new users into table user (MySQL)
-• After successful log-in presents a menu fetched from table fooditems
-• Lets the customer pick an item by ID and prints an “order confirmed” card
-Tech stack
-• Java 8+
-• MySQL 8.x
-• JDBC driver mysql-connector-j (place it on the class-path)
-Quick start
-Clone / copy the project directory.
-Create database & tables once:
-sql
-Copy
-CREATE DATABASE IF NOT EXISTS myfood;
-USE myfood;
+# 🍽️ MyFood Java App
 
+**MyFood** is a simple Java-based console application for food ordering. It allows users to register, log in, browse available food items, and place orders — all connected to a MySQL database.
+
+---
+
+## 📌 Features
+
+- 🔐 User SignUp and Login with validation
+- ✅ Email and strong password pattern checks
+- 🍔 View food items in a clean card-style format
+- 🛒 Order food by selecting item ID
+- 💾 MySQL database integration via JDBC
+
+---
+
+## 🛠️ Tech Stack
+
+- Java (Core + JDBC)
+- MySQL
+- Console-Based UI
+- MySQL Connector/J (JDBC Driver)
+
+---
+
+## 🗃️ Database Setup
+
+### 🔹 Table: `user`
+
+```sql
 CREATE TABLE user (
-    Username   VARCHAR(30) PRIMARY KEY,
-    Password   VARCHAR(64) NOT NULL,
-    Email      VARCHAR(64) NOT NULL UNIQUE,
-    Full_Name  VARCHAR(40) NOT NULL
+  Username VARCHAR(50),
+  Password VARCHAR(100),
+  Email VARCHAR(100) PRIMARY KEY,
+  Full_Name VARCHAR(100)
 );
+📋 Input Validations
+Email: Must follow standard format like abc@example.com
 
-CREATE TABLE fooditems (
-    ID          INT AUTO_INCREMENT PRIMARY KEY,
-    Item_name   VARCHAR(40),
-    category    VARCHAR(20),
-    price       DOUBLE,
-    is_available BOOLEAN
-);
+Password: Must match the pattern:
 
--- sample rows
-INSERT INTO fooditems VALUES
-(1,'Margherita Pizza','Pizza',249.00,true),
-(2,'Veg Burger','Burger',129.00,true),
-(3,'Masala Dosa','South Indian',99.00,true);
-Compile & run
-bash
-Copy
-javac -cp ".;mysql-connector-j-8.x.x.jar" MyFood.java
-java  -cp ".;mysql-connector-j-8.x.x.jar" MyFood
-(use : instead of ; on Linux/macOS)
-Folder layout (minimal)
-MyFood_Package/
-├─ MyFood.java
-└─ README.md   ← this file
-Configuration
-The JDBC URL, user and password are hard-coded at the top of the class:
+At least 8 characters
+
+Includes uppercase, lowercase, number, and special character
+
+No spaces
+
+🚀 How to Run
+✅ Prerequisites
+Java (JDK 8 or later)
+
+MySQL Server
+
+MySQL Connector/J (JDBC Driver)
+
+🔧 Steps
+Clone or download this repository.
+
+Set up your MySQL database and run the schema above.
+
+Update DB credentials in MyFood.java:
+
 java
 Copy
-static String url  = "jdbc:mysql://localhost:3306/myfood";
+Edit
+static String url = "jdbc:mysql://localhost:3306/myfood";
 static String user = "root";
-static String pass = "123456";
-Change them as needed.
-Password / e-mail rules
-• E-mail must look like name@domain.tld
-• Password ≥ 8 chars, must contain at least one upper-case, one lower-case, one digit and one special symbol among @#$%^&+=
-Extending the project
-• Add more CRUD in fooditems (insert, update availability, delete)
-• Introduce an order history table that records user + item + timestamp
-• Replace console with a simple Swing/JavaFX GUI
-Troubleshooting
-• “ClassNotFoundException: com.mysql.cj.jdbc.Driver” → driver JAR is not on the class-path.
-• “Access denied for user” → check MySQL credentials or create a dedicated user.
-• Regex errors → ensure password really contains all required character classes.
-Enjoy your meal!
+static String pass = "your_password";
+Compile and run:
+
+bash
+Copy
+Edit
+javac MyFood.java
+java MyFood
+📷 Sample Output
+yaml
+Copy
+Edit
+===================================
+         Welcome to MY FOOD
+===================================
+For SignUp press 1
+For LogIn press 2
+
++----------------------------------------+
+| Item ID:   101                         |
+| Dish:      Veg Biryani                 |
+| Category:  Main Course                 |
+| Price:     ₹150.00                     |
+| Available: Yes                         |
++----------------------------------------+
+🤝 Contributing
+Contributions are welcome! You can:
+
+Fork the repo
+
+Submit pull requests
+
+Suggest ideas in Issues
+
+🧑‍💻 Author
+Vijay Nangina
+
