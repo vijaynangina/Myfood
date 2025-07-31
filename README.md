@@ -60,23 +60,15 @@ Set up your MySQL database and run the schema above.
 
 Update DB credentials in MyFood.java:
 
-java
-Copy
-Edit
 static String url = "jdbc:mysql://localhost:3306/myfood";
 static String user = "root";
 static String pass = "your_password";
 Compile and run:
 
-bash
-Copy
-Edit
 javac MyFood.java
 java MyFood
 📷 Sample Output
-yaml
-Copy
-Edit
+
 ===================================
          Welcome to MY FOOD
 ===================================
